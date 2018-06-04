@@ -1,0 +1,50 @@
+[
+ {:db/id #db/id[:db.part/db]
+  :db/ident :transaction/amount
+  :db/valueType :db.type/integer
+  :db/cardinality :db.cardinality/one
+  :db/doc "The transaction's amount"}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :transaction/installments
+  :db/valueType :db.type/integer
+  :db/cardinality :db.cardinality/one
+  :db/doc "The number of installments for this transaction"}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :transaction/recipients
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db/doc "The transaction's target recipient"}
+
+
+
+
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :recipients/name
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "The recipient's name"}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :recipients/cnpj
+  :db/valueType :db.type/integer
+  :db/cardinality :db.cardinality/one
+  :db/doc "The recipient's CNPJ"}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :recipients/balances
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db/doc "The recipient's balance ref"}
+
+
+
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :balance/amount
+  :db/valueType :db.type/integer
+  :db/cardinality :db.cardinality/one
+  :db/doc "The recipient balance"}
+ ]
