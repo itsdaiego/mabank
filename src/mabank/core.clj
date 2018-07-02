@@ -1,9 +1,8 @@
 (ns mabank.core
-  (:gen-class)
   (:require [datomic.api :as d]))
 
-
-(def conn nil)
+(def uri "datomic:free://localhost:4334/mabank-db")
+(def conn (d/connect uri))
 
 (defn create-recipient
   [name]
@@ -17,5 +16,4 @@
 
 (defn -main
   [& args]
-  ((create-recipient "fulano")
-  (find-recipients)))
+  (-> (create-recipient "fulano")))
