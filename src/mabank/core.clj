@@ -4,16 +4,34 @@
 (def uri "datomic:free://localhost:4334/mabank-db")
 (def conn (d/connect uri))
 
+(defn transact-schema
+  []
+  (let [schema (load-file "resources/datomic/schema.edn")]
+    (d/transact conn schema)))
+
+(def first-recipient [
+                      {:recipient/name "fulano1"
+                       :recipient/cnpj "01.266.392/0001-06"}
+                      ])
+
 (defn create-recipient
-  [name]
-  @(d/transact conn [{:db/id (d/tempid :db.part/recipient)
-                      :recipients/name name}]))
+  [param]
+  (d/transact conn first-recipient))
 
 (defn find-recipients
-  []
-  (d/q '[:find ?recipient-name
-         :where [_ :recipients/name ?recipients/name]]))
+  [param]
+  (d/q '[:find ?name ?cnpj
+         :where [_ :recipient/name ?name]
+         [_ :recipient/cnpj ?cnpj]]
+       (d/db conn)))
+
+(defn print-content
+  [content]
+  (print content))
 
 (defn -main
   [& args]
-  (-> (create-recipient "fulano")))
+  (-> (transact-schema)
+      (create-recipient)
+      (find-recipients)
+      (print-content)))
