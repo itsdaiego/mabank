@@ -4,15 +4,25 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [com.datomic/datomic-free "0.9.5697"]]
+                 [com.datomic/datomic-free "0.9.5697"]
+                 [io.pedestal/pedestal.service "0.5.2"]
+                 [io.pedestal/pedestal.jetty "0.5.2"]
+                 ;; logging
+                 [ch.qos.logback/logback-classic "1.1.8" :exclusions [org.slf4j/slf4j-api]]
+                 [org.slf4j/jul-to-slf4j "1.7.22"]
+                 [org.slf4j/jcl-over-slf4j "1.7.22"]
+                 [org.slf4j/log4j-over-slf4j "1.7.22"]]
 
-  :main ^:skip-aot mabank.core
+  :resource-paths ["config", "resources"]
+
+  :main ^{:skip-aot true} mabank.server
+
   :target-path "target/%s"
+
   :datomic {:schemas ["resources/datomic" ["schema.edn"]]}
 
-  :profiles {:uberjar {:aot :all}
+  :profiles {:uberjar {:aot [mabank.server]}
              :dev
              {:datomic {:config "resources/datomic/free-transactor-template.properties"
-                        :db-uri "datomic:free://localhost:4334/mabank-db"}}})
-; :profiles {}
-
+                        :db-uri "datomic:free://localhost:4334/mabank-db"}
+              :aliases {"run-dev" ["trampoline" "run" "-m" "mabank.server/start-server"]}}})
