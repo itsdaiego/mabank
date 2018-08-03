@@ -18,11 +18,14 @@
          [_ :recipient/cnpj ?cnpj]]
        (d/db db/conn)))
 
-(defn print-content
-  [content]
-  (print content))
+(defn parse-to-json
+  [contents]
+  (mapv (fn [item] {:name (first item)
+                   :document_number (last item)})
+       contents))
 
 (defn get-recipients
   []
   (-> (create-recipient)
-      (find-recipients)))
+      (find-recipients)
+      (parse-to-json)))

@@ -3,6 +3,7 @@
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
+            [io.pedestal.http.route.definition :refer [defroutes]]
             [mabank.models.recipient :as recipient]))
 
 
@@ -16,11 +17,9 @@
   [request]
   (ring-resp/response ""))
 
-(def common-interceptors [(body-params/body-params) http/html-body])
-(def common-interceptors-json [(body-params/body-params) http/json-body])
-
-(def routes #{["/_health-check" :get (conj common-interceptors `health-check)]
-              ["/recipients" :get (conj common-interceptors `get-recipients)]})
+(defroutes routes
+  [[["/"
+     ["/recipients" {:get get-recipients}]]]])
 
 (def service {:env :prod
               ::http/routes routes
