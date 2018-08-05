@@ -7,11 +7,12 @@
                  [com.datomic/datomic-free "0.9.5697"]
                  [io.pedestal/pedestal.service "0.5.2"]
                  [io.pedestal/pedestal.jetty "0.5.2"]
-                 ;; logging
                  [ch.qos.logback/logback-classic "1.1.8" :exclusions [org.slf4j/slf4j-api]]
                  [org.slf4j/jul-to-slf4j "1.7.22"]
                  [org.slf4j/jcl-over-slf4j "1.7.22"]
-                 [org.slf4j/log4j-over-slf4j "1.7.22"]]
+                 [org.slf4j/log4j-over-slf4j "1.7.22"]
+                 [cheshire "5.8.0"]] 
+
 
   :resource-paths ["config", "resources"]
 
@@ -24,5 +25,4 @@
   :profiles {:uberjar {:aot [mabank.server]}
              :dev
              {:datomic {:config "resources/datomic/free-transactor-template.properties"
-                        :db-uri "datomic:free://localhost:4334/mabank-db"}
-              :aliases {"run-dev" ["trampoline" "run" "-m" "mabank.server/start-server"]}}})
+                        :db-uri "datomic:free://localhost:4334/mabank-db"}}})

@@ -1,6 +1,7 @@
 (ns mabank.models.recipient
-  (:require [mabank.db.connector :as db]
-            [datomic.api :as d]))
+  (:require [mabank.db :as db]
+            [datomic.api :as d]
+            [cheshire.core :refer :all]))
 
 (def first-recipient [
                       {:recipient/name "fulano1"
@@ -18,14 +19,15 @@
          [_ :recipient/cnpj ?cnpj]]
        (d/db db/conn)))
 
-(defn parse-to-json
+(defn vector-to-hashmap
   [contents]
   (mapv (fn [item] {:name (first item)
-                   :document_number (last item)})
-       contents))
+                    :document_number (last item)})
+        contents))
 
 (defn get-recipients
   []
   (-> (create-recipient)
       (find-recipients)
-      (parse-to-json)))
+      (vector-to-hashmap)
+      (generate-string)))

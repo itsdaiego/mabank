@@ -11,15 +11,15 @@
 
 (defn get-recipients
   [request]
-  (ring-resp/response (str @recipients-result)))
+  (ring-resp/content-type (ring-resp/response @recipients-result) "application/json"))
 
-(defn health-check
+(defn get-health-check
   [request]
   (ring-resp/response ""))
 
 (defroutes routes
-  [[["/"
-     ["/recipients" {:get get-recipients}]]]])
+  [[["/_health-check" {:get get-health-check}]
+    ["/recipients" {:get get-recipients}]]])
 
 (def service {:env :prod
               ::http/routes routes

@@ -1,4 +1,4 @@
-(ns mabank.db.connector
+(ns mabank.db
   (:require [datomic.api :as d]))
 
 (def uri "datomic:free://localhost:4334/mabank-db")
