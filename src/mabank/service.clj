@@ -7,11 +7,9 @@
             [mabank.models.recipient :as recipient]))
 
 
-(def recipients-result (future(recipient/get-recipients)))
-
 (defn get-recipients
   [request]
-  (ring-resp/content-type (ring-resp/response @recipients-result) "application/json"))
+  (ring-resp/content-type (ring-resp/response @(future(recipient/get-recipients))) "application/json"))
 
 (defn get-health-check
   [request]
