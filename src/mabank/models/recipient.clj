@@ -8,12 +8,8 @@
                        :recipient/cnpj "01.266.392/0001-06"}
                       ])
 
-(defn create-recipient
-  []
-  (d/transact db/conn first-recipient))
-
 (defn find-recipients
-  [param]
+  []
   (d/q '[:find ?name ?cnpj
          :where [_ :recipient/name ?name]
          [_ :recipient/cnpj ?cnpj]]
@@ -21,13 +17,14 @@
 
 (defn vector-to-hashmap
   [contents]
-  (mapv (fn [item] {:name (first item)
+  (cond
+    (empty? contents) []
+    (not (empty? contents)) (mapv (fn [item] {:name (first item)
                     :document_number (last item)})
-        contents))
+        contents)))
 
 (defn get-recipients
   []
-  (-> (create-recipient)
-      (find-recipients)
+  (-> (find-recipients)
       (vector-to-hashmap)
       (generate-string)))
