@@ -1,0 +1,48 @@
+01:07:19.902 [clojure-agent-send-off-pool-0] INFO  datomic.kv-cluster - {:event :kv-cluster/get-pod, :pod-key "pod-catalog", :phase :begin, :pid 18361, :tid 14}
+01:07:19.983 [clojure-agent-send-off-pool-0] INFO  datomic.kv-cluster - {:event :kv-cluster/get-pod, :pod-key "pod-catalog", :msec 76.6, :phase :end, :pid 18361, :tid 14}
+01:07:19.987 [main] INFO  datomic.domain - {:event :cache/create, :cache-bytes 2089811968, :pid 18361, :tid 1}
+01:07:19.993 [main] INFO  datomic.peer - {:event :peer/connect-transactor, :host "localhost", :alt-host nil, :port 4334, :version "0.9.5697", :pid 18361, :tid 1}
+01:07:20.568 [clojure-agent-send-off-pool-0] INFO  datomic.kv-cluster - {:event :kv-cluster/get-pod, :pod-key "pod-log-tail/mabank-db-8e63ac4c-70f9-4581-a2d0-f5ee6083fa36", :phase :begin, :pid 18361, :tid 14}
+01:07:20.580 [clojure-agent-send-off-pool-0] INFO  datomic.kv-cluster - {:event :kv-cluster/get-pod, :pod-key "pod-log-tail/mabank-db-8e63ac4c-70f9-4581-a2d0-f5ee6083fa36", :msec 11.3, :phase :end, :pid 18361, :tid 14}
+01:07:20.706 [clojure-agent-send-off-pool-0] INFO  datomic.log - {:event :log/load-segments, :count 0, :pid 18361, :tid 14}
+01:07:20.719 [main] INFO  datomic.log - {:event :log/catchup-fulltext, :phase :begin, :pid 18361, :tid 1}
+01:07:20.822 [main] INFO  datomic.log - {:event :log/catchup-fulltext, :msec 103.0, :phase :end, :pid 18361, :tid 1}
+01:07:20.823 [main] INFO  datomic.log - {:event :log/catchup, :bytes 3888, :tail-t 1010, :index-t 63, :msec 28, :pid 18361, :tid 1}
+01:07:20.838 [clojure-agent-send-off-pool-0] INFO  datomic.kv-cluster - {:event :kv-cluster/get-pod, :pod-key "pod-log-tail/mabank-db-8e63ac4c-70f9-4581-a2d0-f5ee6083fa36", :phase :begin, :pid 18361, :tid 14}
+01:07:20.847 [clojure-agent-send-off-pool-0] INFO  datomic.kv-cluster - {:event :kv-cluster/get-pod, :pod-key "pod-log-tail/mabank-db-8e63ac4c-70f9-4581-a2d0-f5ee6083fa36", :msec 7.88, :phase :end, :pid 18361, :tid 14}
+01:07:20.858 [main] INFO  datomic.log - {:event :log/catchup-fulltext, :phase :begin, :pid 18361, :tid 1}
+01:07:20.858 [main] INFO  datomic.log - {:event :log/catchup-fulltext, :msec 0.0741, :phase :end, :pid 18361, :tid 1}
+01:07:20.858 [main] INFO  datomic.log - {:event :log/catchup, :bytes 0, :tail-t 1010, :index-t 1010, :msec 1, :pid 18361, :tid 1}
+01:07:20.871 [main] INFO  datomic.peer - {:event :peer/cache-connection, :protocol :free, :db-name "mabank-db", :system-root "localhost:4334", :host "localhost", :port 4334, :db-id "mabank-db-8e63ac4c-70f9-4581-a2d0-f5ee6083fa36", :pid 18361, :tid 1}
+01:07:20.877 [main] INFO  datomic.peer - {:event :peer/transact, :uuid #uuid "5b95edf8-bd99-46da-bc54-5e9d47704df1", :phase :start, :pid 18361, :tid 1}
+01:07:20.897 [clojure-agent-send-off-pool-2] INFO  datomic.peer - {:event :peer/transact, :uuid #uuid "5b95edf8-bd99-46da-bc54-5e9d47704df1", :phase :end, :pid 18361, :tid 44}
+01:07:20.899 [clojure-agent-send-off-pool-2] INFO  datomic.peer - {:event :peer/notify-data, :msec 3, :id #uuid "5b95edf8-bd99-46da-bc54-5e9d47704df1", :pid 18361, :tid 44}
+01:07:20.970 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @7970ms to org.eclipse.jetty.util.log.Slf4jLog
+01:07:21.096 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.4.0.v20161208
+01:07:21.126 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@33650388{/,null,AVAILABLE}
+01:07:21.141 [main] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@1f561074{HTTP/1.1,[http/1.1, h2c]}{0.0.0.0:8080}
+01:07:21.145 [main] INFO  org.eclipse.jetty.server.Server - Started @8146ms
+01:08:09.830 [clojure-agent-send-off-pool-0] INFO  datomic.kv-cluster - {:event :kv-cluster/get-pod, :pod-key "pod-catalog", :phase :begin, :pid 20201, :tid 14}
+01:08:09.890 [clojure-agent-send-off-pool-0] INFO  datomic.kv-cluster - {:event :kv-cluster/get-pod, :pod-key "pod-catalog", :msec 55.3, :phase :end, :pid 20201, :tid 14}
+01:08:09.893 [main] INFO  datomic.domain - {:event :cache/create, :cache-bytes 2089811968, :pid 20201, :tid 1}
+01:08:09.899 [main] INFO  datomic.peer - {:event :peer/connect-transactor, :host "localhost", :alt-host nil, :port 4334, :version "0.9.5697", :pid 20201, :tid 1}
+01:08:10.309 [clojure-agent-send-off-pool-0] INFO  datomic.kv-cluster - {:event :kv-cluster/get-pod, :pod-key "pod-log-tail/mabank-db-8e63ac4c-70f9-4581-a2d0-f5ee6083fa36", :phase :begin, :pid 20201, :tid 14}
+01:08:10.319 [clojure-agent-send-off-pool-0] INFO  datomic.kv-cluster - {:event :kv-cluster/get-pod, :pod-key "pod-log-tail/mabank-db-8e63ac4c-70f9-4581-a2d0-f5ee6083fa36", :msec 9.94, :phase :end, :pid 20201, :tid 14}
+01:08:10.388 [clojure-agent-send-off-pool-0] INFO  datomic.log - {:event :log/load-segments, :count 0, :pid 20201, :tid 14}
+01:08:10.395 [main] INFO  datomic.log - {:event :log/catchup-fulltext, :phase :begin, :pid 20201, :tid 1}
+01:08:10.458 [main] INFO  datomic.log - {:event :log/catchup-fulltext, :msec 62.9, :phase :end, :pid 20201, :tid 1}
+01:08:10.458 [main] INFO  datomic.log - {:event :log/catchup, :bytes 4160, :tail-t 1011, :index-t 63, :msec 14, :pid 20201, :tid 1}
+01:08:10.467 [clojure-agent-send-off-pool-0] INFO  datomic.kv-cluster - {:event :kv-cluster/get-pod, :pod-key "pod-log-tail/mabank-db-8e63ac4c-70f9-4581-a2d0-f5ee6083fa36", :phase :begin, :pid 20201, :tid 14}
+01:08:10.471 [clojure-agent-send-off-pool-0] INFO  datomic.kv-cluster - {:event :kv-cluster/get-pod, :pod-key "pod-log-tail/mabank-db-8e63ac4c-70f9-4581-a2d0-f5ee6083fa36", :msec 3.54, :phase :end, :pid 20201, :tid 14}
+01:08:10.477 [main] INFO  datomic.log - {:event :log/catchup-fulltext, :phase :begin, :pid 20201, :tid 1}
+01:08:10.477 [main] INFO  datomic.log - {:event :log/catchup-fulltext, :msec 0.0684, :phase :end, :pid 20201, :tid 1}
+01:08:10.477 [main] INFO  datomic.log - {:event :log/catchup, :bytes 0, :tail-t 1011, :index-t 1011, :msec 0, :pid 20201, :tid 1}
+01:08:10.482 [main] INFO  datomic.peer - {:event :peer/cache-connection, :protocol :free, :db-name "mabank-db", :system-root "localhost:4334", :host "localhost", :port 4334, :db-id "mabank-db-8e63ac4c-70f9-4581-a2d0-f5ee6083fa36", :pid 20201, :tid 1}
+01:08:10.486 [main] INFO  datomic.peer - {:event :peer/transact, :uuid #uuid "5b95ee2a-8a3b-4979-8843-0db31184a2fe", :phase :start, :pid 20201, :tid 1}
+01:08:10.497 [clojure-agent-send-off-pool-2] INFO  datomic.peer - {:event :peer/transact, :uuid #uuid "5b95ee2a-8a3b-4979-8843-0db31184a2fe", :phase :end, :pid 20201, :tid 39}
+01:08:10.499 [clojure-agent-send-off-pool-2] INFO  datomic.peer - {:event :peer/notify-data, :msec 2, :id #uuid "5b95ee2a-8a3b-4979-8843-0db31184a2fe", :pid 20201, :tid 39}
+01:08:10.542 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @6718ms to org.eclipse.jetty.util.log.Slf4jLog
+01:08:10.665 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.4.0.v20161208
+01:08:10.679 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@6a9f41ff{/,null,AVAILABLE}
+01:08:10.684 [main] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@1ed8d18c{HTTP/1.1,[http/1.1, h2c]}{0.0.0.0:8080}
+01:08:10.685 [main] INFO  org.eclipse.jetty.server.Server - Started @6861ms
