@@ -4,20 +4,27 @@
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
             [io.pedestal.http.route.definition :refer [defroutes]]
-            [mabank.models.recipient :as recipient]))
+            [mabank.models.recipient.fetch :as recipient-fetch]
+            [mabank.models.recipient.create :as recipient-create]))
 
 
 (defn get-recipients
-  [request]
-  (ring-resp/content-type (ring-resp/response @(future(recipient/get-recipients))) "application/json"))
+  [req]
+  (ring-resp/content-type (ring-resp/response @(future(recipient-fetch/run))) "application/json"))
+
+(defn create-recipient
+  [req]
+  (ring-resp/content-type (ring-resp/response @(future(recipient-create/run req))) "application/json"))
 
 (defn get-health-check
-  [request]
+  [req]
   (ring-resp/response ""))
 
 (defroutes routes
   [[["/_health-check" {:get get-health-check}]
-    ["/recipients" {:get get-recipients}]]])
+    ["/recipients" {:get get-recipients}]
+    ["/recipients" {:post create-recipient}
+     ^:interceptors [(body-params/body-params)]]]])
 
 (def service {:env :prod
               ::http/routes routes

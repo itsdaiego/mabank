@@ -1,4 +1,4 @@
-(ns mabank.models.recipient
+(ns mabank.models.recipient.fetch
   (:require [mabank.db :as db]
             [datomic.api :as d]
             [cheshire.core :refer :all]))
@@ -23,7 +23,7 @@
                     :document_number (last item)})
         contents)))
 
-(defn get-recipients
+(defn run
   []
   (-> (find-recipients)
       (vector-to-hashmap)
