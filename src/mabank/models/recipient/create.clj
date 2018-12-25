@@ -16,11 +16,17 @@
   @(d/transact db/conn [{
                         :recipient/name (get params :name)
                         :recipient/cnpj (get params :document_number)
-                        }]))
+                        }])
+  params)
 
-; TODO: Parse datomic's data to respond a proper json 
-;       containing the new recipient's content
+(defn build-response
+  [recipient]
+  (-> (hash-map :name (get recipient :name)
+                :document_number (get recipient :document_number))
+      (generate-string)))
+
 (defn run
   [req]
   (-> (parse-to-hashmap req)
-      (save)))
+      (save)
+      (build-response)))
