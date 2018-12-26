@@ -3,15 +3,12 @@
             [datomic.api :as d]
             [cheshire.core :refer :all]))
 
-(def first-recipient [
-                      {:recipient/name "fulano1"
-                       :recipient/document_number "01.266.392/0001-06"}
-                      ])
 
 (defn find-recipients
   []
-  (d/q '[:find ?name ?document_number
-         :where [_ :recipient/name ?name]
+  (d/q '[:find ?e ?name ?document_number
+         :where [?e :recipient/name _]
+         [_ :recipient/name ?name]
          [_ :recipient/document_number ?document_number]]
        (d/db db/conn)))
 
@@ -19,9 +16,10 @@
   [contents]
   (cond
     (empty? contents) []
-    (not (empty? contents)) (mapv (fn [item] {:name (first item)
-                    :document_number (last item)})
-        contents)))
+    (not (empty? contents)) (mapv (fn [item] {:id (first item) 
+                                              :name (second item)
+                                              :document_number (last item)})
+                                  contents)))
 
 (defn run
   []
