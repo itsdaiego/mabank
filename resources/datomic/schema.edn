@@ -1,23 +1,61 @@
 [
 
  ; Transactions
- {:db/id #db/id[:db.part/db]
+ {
   :db/ident :transaction/amount
-  :db/valueType :db.type/bigint
+  :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one
   :db/doc "The transaction's amount"}
 
- {:db/id #db/id[:db.part/db]
+ {:db/ident :transaction/status
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "The transaction's status"}
+
+ {
   :db/ident :transaction/installments
-  :db/valueType :db.type/bigint
+  :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one
   :db/doc "The number of installments for this transaction"}
 
- {:db/id #db/id[:db.part/db]
+ {
   :db/ident :transaction/recipient
   :db/valueType :db.type/ref
   :db/cardinality :db.cardinality/one
   :db/doc "The transaction's target recipient"}
+
+
+ ; Payables
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :payable/amount
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one
+  :db/doc "The payable's amount"}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :payable/fee
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one
+  :db/doc "The payable's fee"}
+
+ {:db/ident :payable/status
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "The payable's status"}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :payable/installment
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one
+  :db/doc "The payable's installment"}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :payable/payment-date
+  :db/valueType :db.type/instant
+  :db/cardinality :db.cardinality/one
+  :db/doc "The payable's payment date"}
+
 
 
   ; Recipients
@@ -31,16 +69,17 @@
   :db/cardinality :db.cardinality/one
   :db/doc "The recipient's document number"}
 
- {:db/ident :recipient/balances
-  :db/valueType :db.type/ref
-  :db/cardinality :db.cardinality/one
-  :db/doc "The recipient's balance ref"}
-
 
  ; Balance
  {:db/id #db/id[:db.part/db]
-  :db/ident :balance/amount
-  :db/valueType :db.type/bigint
+  :db/ident :balance/waiting-payment
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one
+  :db/doc "The recipient balance"}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :balance/available
+  :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one
   :db/doc "The recipient balance"}
  ]
