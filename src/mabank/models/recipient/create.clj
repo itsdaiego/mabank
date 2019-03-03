@@ -15,7 +15,7 @@
   [params]
   @(d/transact db/conn [{
                         :recipient/name (get params :name)
-                        :recipient/cnpj (get params :document_number)
+                        :recipient/document_number (get params :document_number)
                         }])
   params)
 

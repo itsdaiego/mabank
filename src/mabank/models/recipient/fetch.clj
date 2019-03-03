@@ -5,14 +5,14 @@
 
 (def first-recipient [
                       {:recipient/name "fulano1"
-                       :recipient/cnpj "01.266.392/0001-06"}
+                       :recipient/document_number "01.266.392/0001-06"}
                       ])
 
 (defn find-recipients
   []
-  (d/q '[:find ?name ?cnpj
+  (d/q '[:find ?name ?document_number
          :where [_ :recipient/name ?name]
-         [_ :recipient/cnpj ?cnpj]]
+         [_ :recipient/document_number ?document_number]]
        (d/db db/conn)))
 
 (defn vector-to-hashmap

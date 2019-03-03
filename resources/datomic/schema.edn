@@ -26,10 +26,10 @@
   :db/cardinality :db.cardinality/one
   :db/doc "The recipient's name"}
 
- {:db/ident :recipient/cnpj
+ {:db/ident :recipient/document_number
   :db/valueType :db.type/string
   :db/cardinality :db.cardinality/one
-  :db/doc "The recipient's CNPJ"}
+  :db/doc "The recipient's document number"}
 
  {:db/ident :recipient/balances
   :db/valueType :db.type/ref
