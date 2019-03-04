@@ -3,12 +3,14 @@
             [datomic.api :as d]
             [cheshire.core :refer :all]))
 
+(def default-status "waiting-payemnt")
+
 (defn parse-to-hashmap
   [req]
   (let [params (get req :json-params)]
     (hash-map :amount (get params :amount)
               :installments (get params :installments)
-              :recipient (get params :recipient))))
+              :recipient-id (get params :recipient-id))))
 
 (defn save
   [params]
@@ -16,7 +18,7 @@
                          :transaction/amount (get params :amount)
                          :transaction/installments (get params :installments)
                          :transaction/recipient (get params :recipient-id)
-                         :transaction/status "waiting-payemnt"
+                         :transaction/status default-status
                          }])
   params)
 
@@ -24,8 +26,8 @@
   [transaction]
   (-> (hash-map :amount (get transaction :amount)
                 :installments (get transaction :installments)
-                :recipient (get transaction :recipient)
-                :status (get transaction :status))
+                :status default-status
+                :recipient (get transaction :recipient-id))
       (generate-string)))
 
 (defn run

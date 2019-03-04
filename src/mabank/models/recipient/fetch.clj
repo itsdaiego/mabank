@@ -8,8 +8,8 @@
   []
   (d/q '[:find ?e ?name ?document_number
          :where [?e :recipient/name _]
-         [_ :recipient/name ?name]
-         [_ :recipient/document_number ?document_number]]
+         [?e :recipient/name ?name]
+         [?e :recipient/document_number ?document_number]]
        (d/db db/conn)))
 
 (defn vector-to-hashmap
