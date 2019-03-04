@@ -6,7 +6,8 @@
             [io.pedestal.http.route.definition :refer [defroutes]]
             [mabank.models.recipient.fetch :as recipient-fetch]
             [mabank.models.recipient.create :as recipient-create]
-            [mabank.models.transaction.create :as transaction-create]))
+            [mabank.models.transaction.create :as transaction-create]
+            [mabank.models.transaction.fetch :as transaction-fetch]))
 
 
 (defn get-recipients
@@ -21,6 +22,9 @@
   [req]
   (ring-resp/content-type (ring-resp/response @(future(transaction-create/run req))) "application/json"))
 
+(defn get-transactions
+  [req]
+  (ring-resp/content-type (ring-resp/response @(future(transaction-fetch/run))) "application/json"))
 
 (defn get-health-check
   [req]
@@ -31,6 +35,7 @@
     ["/recipients" {:get get-recipients}]
     ["/recipients" {:post create-recipient}
      ^:interceptors [(body-params/body-params)]]
+    ["/transactions" {:get get-transactions}]
     ["/transactions" {:post create-transaction}
      ^:interceptors [(body-params/body-params)]]]])
 
