@@ -1,7 +1,9 @@
 (ns mabank.models.transaction.create
   (:require [mabank.db :as db]
+            [mabank.models.payable.create :as payable-create]
             [datomic.api :as d]
-            [cheshire.core :refer :all]))
+            [cheshire.core :refer :all]
+            [robert.hooke :as hooke]))
 
 (def default-status "waiting-payemnt")
 
@@ -27,11 +29,13 @@
   (-> (hash-map :amount (get transaction :amount)
                 :installments (get transaction :installments)
                 :status default-status
-                :recipient (get transaction :recipient-id))
-      (generate-string)))
+                :recipient (get transaction :recipient-id))))
 
 (defn run
   [req]
   (-> (parse-to-hashmap req)
       (save)
       (build-response)))
+
+
+(hooke/add-hook #'build-response #'payable-create/run)

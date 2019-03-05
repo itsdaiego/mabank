@@ -12,6 +12,8 @@
                  [org.slf4j/jul-to-slf4j "1.7.22"]
                  [org.slf4j/jcl-over-slf4j "1.7.22"]
                  [org.slf4j/log4j-over-slf4j "1.7.22"]
+                 [robert/hooke "1.3.0"]
+                 [clj-time "0.15.0"]
                  [cheshire "5.8.0"]] 
 
   :resource-paths ["config", "resources"]
