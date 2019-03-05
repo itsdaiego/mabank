@@ -2,7 +2,6 @@
   (:require [mabank.db :as db]
             [mabank.models.payable.create :as payable-create]
             [datomic.api :as d]
-            [cheshire.core :refer :all]
             [robert.hooke :as hooke]))
 
 (def default-status "waiting-payemnt")

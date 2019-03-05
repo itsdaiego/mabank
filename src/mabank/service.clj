@@ -7,7 +7,8 @@
             [mabank.models.recipient.fetch :as recipient-fetch]
             [mabank.models.recipient.create :as recipient-create]
             [mabank.models.transaction.create :as transaction-create]
-            [mabank.models.transaction.fetch :as transaction-fetch]))
+            [mabank.models.transaction.fetch :as transaction-fetch]
+            [mabank.models.payable.fetch :as payable-fetch]))
 
 
 (defn get-recipients
@@ -26,6 +27,10 @@
   [req]
   (ring-resp/content-type (ring-resp/response @(future(transaction-fetch/run))) "application/json"))
 
+(defn get-payables
+  [req]
+  (ring-resp/content-type (ring-resp/response @(future(payable-fetch/run))) "application/json"))
+
 (defn get-health-check
   [req]
   (ring-resp/response ""))
@@ -37,7 +42,8 @@
      ^:interceptors [(body-params/body-params)]]
     ["/transactions" {:get get-transactions}]
     ["/transactions" {:post create-transaction}
-     ^:interceptors [(body-params/body-params)]]]])
+     ^:interceptors [(body-params/body-params)]]
+    ["/payables" {:get get-payables}]]])
 
 (def service {:env :prod
               ::http/routes routes
