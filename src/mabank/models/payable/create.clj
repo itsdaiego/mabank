@@ -45,6 +45,7 @@
 (defn run
   [db-result transaction]
    (map (partial save transaction) 
-       (inc (range (get transaction :installments))))
+       (drop 1 (range (inc (get transaction :installments)))))
+
    ;; TODO: find better way of dealing with add-hook function
    (generate-string transaction))
