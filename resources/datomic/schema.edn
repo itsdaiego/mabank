@@ -1,24 +1,25 @@
 [
 
  ; Transactions
- {
+ {:db/id #db/id [db.part/db]
   :db/ident :transaction/amount
   :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one
   :db/doc "The transaction's amount"}
 
- {:db/ident :transaction/status
+ {:db/id #db/id [db.part/db]
+  :db/ident :transaction/status
   :db/valueType :db.type/string
   :db/cardinality :db.cardinality/one
   :db/doc "The transaction's status"}
 
- {
+ {:db/id #db/id [db.part/db]
   :db/ident :transaction/installments
   :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one
   :db/doc "The number of installments for this transaction"}
 
- {
+ {:db/id #db/id [db.part/db]
   :db/ident :transaction/recipient
   :db/valueType :db.type/ref
   :db/cardinality :db.cardinality/one
@@ -27,57 +28,71 @@
 
  ; Payables
 
- {:db/id #db/id[:db.part/db]
+ {:db/id #db/id [db.part/db]
   :db/ident :payable/amount
   :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one
   :db/doc "The payable's amount"}
 
- {:db/id #db/id[:db.part/db]
+ {:db/id #db/id [db.part/db]
   :db/ident :payable/fee
   :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one
   :db/doc "The payable's fee"}
 
- {:db/ident :payable/status
+ {:db/id #db/id [db.part/db]
+  :db/ident :payable/status
   :db/valueType :db.type/string
   :db/cardinality :db.cardinality/one
   :db/doc "The payable's status"}
 
- {:db/id #db/id[:db.part/db]
+ {:db/id #db/id [db.part/db]
   :db/ident :payable/installment
   :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one
   :db/doc "The payable's installment"}
 
- {:db/id #db/id[:db.part/db]
+ {:db/id #db/id [db.part/db]
   :db/ident :payable/payment-date
   :db/valueType :db.type/instant
   :db/cardinality :db.cardinality/one
   :db/doc "The payable's payment date"}
 
+ {:db/id #db/id [db.part/db]
+  :db/ident :payable/recipient
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db/doc "The payable's target recipient"}
+
+ {:db/id #db/id [db.part/db]
+  :db/ident :payable/transaction
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db/doc "The payable's target transaction"}
 
 
   ; Recipients
- {:db/ident :recipient/name
+ {:db/id #db/id [db.part/db]
+  :db/ident :recipient/name
   :db/valueType :db.type/string
   :db/cardinality :db.cardinality/one
   :db/doc "The recipient's name"}
 
- {:db/ident :recipient/document_number
+ {:db/id #db/id [db.part/db]
+  :db/ident :recipient/document_number
   :db/valueType :db.type/string
   :db/cardinality :db.cardinality/one
   :db/doc "The recipient's document number"}
 
 
  ; Balance
- {:db/id #db/id[:db.part/db]
+ {:db/id #db/id [db.part/db]
   :db/ident :balance/waiting-payment
   :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one
   :db/doc "The recipient balance"}
 
- {:db/id #db/id[:db.part/db]
+ {:db/id #db/id [db.part/db]
   :db/ident :balance/available
   :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one
