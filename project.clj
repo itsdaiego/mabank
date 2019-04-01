@@ -25,7 +25,7 @@
   :plugins [[lein-datomic "0.2.0"]] 
 
   :datomic {:schemas ["resources/datomic" ["schema.edn"]]
-            :install-location "/home/daiego/.lein/datomic-free-0.9.5697"}
+            :install-location "<path_to_datomic-free-0.9.5697"}
 
   :profiles {:uberjar {:aot [mabank.server]}
              :dev
