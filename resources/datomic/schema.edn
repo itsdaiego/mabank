@@ -87,14 +87,32 @@
 
  ; Balance
  {:db/id #db/id [db.part/db]
-  :db/ident :balance/waiting-payment
-  :db/valueType :db.type/long
+  :db/ident :balance/status
+  :db/valueType :db.type/string
   :db/cardinality :db.cardinality/one
-  :db/doc "The recipient balance"}
+  :db/doc "The balance's status"}
 
  {:db/id #db/id [db.part/db]
-  :db/ident :balance/available
+  :db/ident :balance/amount
   :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one
-  :db/doc "The recipient balance"}
+  :db/doc "The payable amount"}
+
+ {:db/id #db/id [db.part/db]
+  :db/ident :balance/fee
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one
+  :db/doc "The payable fee"}
+
+ {:db/id #db/id [db.part/db]
+  :db/ident :balance/recipient
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db/doc "The balance's target recipient"}
+
+ {:db/id #db/id [db.part/db]
+  :db/ident :balance/payable
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db/doc "The balance's target payable"}
  ]
