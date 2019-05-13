@@ -86,6 +86,7 @@
 
 
  ; Balance
+ ; TODO: should add type (waiting_payment, paid etc...)
  {:db/id #db/id [db.part/db]
   :db/ident :balance/status
   :db/valueType :db.type/string

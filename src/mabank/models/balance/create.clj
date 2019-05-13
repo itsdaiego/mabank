@@ -5,13 +5,14 @@
 
 (defn save
   [payables]
-  (map #(let [tx-result @(d/transact db/conn [{:db/id (d/tempid :db.part/user)
+  (map #(@(d/transact db/conn [{:db/id (d/tempid :db.part/user)
                                          :balance/status "future-payment"
                                          :balance/amount (get % :amount)
                                          :balance/fee (get % :fee)
                                          :balance/recipient (get % :recipient-id)
                                          :balance/payable (get % :payable-id)
-                                         }])]) payables))
+                                         }])) payables))
+
 (defn run
   [model payable]
   (save payable))

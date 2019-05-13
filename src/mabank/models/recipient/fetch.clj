@@ -4,6 +4,7 @@
             [cheshire.core :refer :all]))
 
 
+; TODO https://stackoverflow.com/questions/14189647/get-all-fields-from-a-datomic-entity
 (defn find-recipients
   []
   (d/q '[:find ?e ?name ?document_number
