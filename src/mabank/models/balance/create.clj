@@ -3,15 +3,19 @@
             [datomic.api :as d]
             [cheshire.core :refer :all]))
 
+(defn create
+  [payable]
+  @(d/transact db/conn [{:db/id (d/tempid :db.part/user)
+                                         :balance/status "future-payment"
+                                         :balance/amount (get payable :amount)
+                                         :balance/fee (get payable :fee)
+                                         :balance/recipient (get payable :recipient-id)
+                                         :balance/payable (get payable :payable-id)
+                                         }]))
+
 (defn save
   [payables]
-  (map #(@(d/transact db/conn [{:db/id (d/tempid :db.part/user)
-                                         :balance/status "future-payment"
-                                         :balance/amount (get % :amount)
-                                         :balance/fee (get % :fee)
-                                         :balance/recipient (get % :recipient-id)
-                                         :balance/payable (get % :payable-id)
-                                         }])) payables))
+  (doall (map create payables)))
 
 (defn run
   [model payable]

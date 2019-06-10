@@ -7,20 +7,28 @@
   [req]
   (let [recipient-id (read-string(get-in req [:path-params :recipient-id]))]
 
-  (d/q '[:find ?e (sum ?amount)
-         :in $ ?recipient-id
-         :where [?e :balance/recipient ?recipient-id]
-         [?e :balance/amount ?amount]] 
-       (d/db db/conn) recipient-id)))
+    (d/q '[:find ?e ?amount ?status
+           :in $ ?recipient-id
+           :where [?e :balance/recipient ?recipient-id]
+           [?e :balance/amount ?amount]
+           [?e :balance/status ?status]] 
+         (d/db db/conn) recipient-id)))
+
+
+(defn sum-amount
+  [contents]
+  (reduce + (map (fn [item] (second item)) contents)))
+
+(defn get-status
+  [contents]
+  (first (map (fn [item] (nth item 2)) contents)))
 
 (defn vector-to-hashmap
   [contents]
   (cond
     (empty? contents) []
-    (not (empty? contents)) (mapv (fn [item] {
-                                              :amount (first item)
-                                              })
-                                  contents)))
+    (not (empty? contents)) (hash-map :amount (sum-amount contents)
+                                      :status (get-status contents))))
 
 (defn run
   [req]
