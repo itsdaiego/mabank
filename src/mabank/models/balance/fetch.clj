@@ -14,12 +14,21 @@
            [?e :balance/status ?status]] 
          (d/db db/conn) recipient-id)))
 
+
+(defn sum-amount
+  [contents]
+  (reduce + (map (fn [item] (second item)) contents)))
+
+(defn get-status
+  [contents]
+  (first (map (fn [item] (nth item 2)) contents)))
+
 (defn vector-to-hashmap
   [contents]
   (cond
     (empty? contents) []
-    (not (empty? contents)) (hash-map :amount (reduce + (doall (map (fn [item] (second item)) contents)))
-                                      :status (get-in contents [0 2])))) 
+    (not (empty? contents)) (hash-map :amount (sum-amount contents)
+                                      :status (get-status contents))))
 
 (defn run
   [req]
