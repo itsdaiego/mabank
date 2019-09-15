@@ -4,6 +4,8 @@
             [datomic.api :as d]
             [robert.hooke :as hooke]))
 
+(def conn db/conn)
+
 (def default-status "waiting-payemnt")
 
 (def new-id (d/tempid :db.part/user))
@@ -18,7 +20,7 @@
 
 (defn save
   [req-params]
-  (let [tx-result @(d/transact db/conn [{:db/id new-id
+  (let [tx-result @(d/transact conn [{:db/id new-id
                                          :transaction/amount (get req-params :amount)
                                          :transaction/installments (get req-params :installments)
                                          :transaction/recipient (get req-params :recipient-id)

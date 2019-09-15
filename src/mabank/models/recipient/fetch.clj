@@ -3,6 +3,7 @@
             [datomic.api :as d]
             [cheshire.core :refer :all]))
 
+(def conn db/conn)
 
 ; TODO https://stackoverflow.com/questions/14189647/get-all-fields-from-a-datomic-entity
 (defn find-recipients
@@ -11,7 +12,7 @@
          :where [?e :recipient/name _]
          [?e :recipient/name ?name]
          [?e :recipient/document_number ?document_number]]
-       (d/db db/conn)))
+       (d/db conn)))
 
 (defn vector-to-hashmap
   [contents]

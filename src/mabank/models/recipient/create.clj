@@ -3,6 +3,7 @@
             [datomic.api :as d]
             [cheshire.core :refer :all]))
 
+(def conn db/conn)
 
 (defn parse-to-hashmap
   [req]
@@ -13,7 +14,7 @@
 
 (defn save
   [params]
-  @(d/transact db/conn [{
+  @(d/transact conn [{
                         :recipient/name (get params :name)
                         :recipient/document_number (get params :document_number)
                         }])

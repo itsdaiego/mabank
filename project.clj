@@ -14,7 +14,8 @@
                  [org.slf4j/log4j-over-slf4j "1.7.22"]
                  [robert/hooke "1.3.0"]
                  [clj-time "0.15.0"]
-                 [cheshire "5.8.0"]] 
+                 [cheshire "5.8.0"]
+                 [expectations "2.1.10"]] 
 
   :resource-paths ["config", "resources"]
 
@@ -22,7 +23,8 @@
 
   :target-path "target/%s"
 
-  :plugins [[lein-datomic "0.2.0"]] 
+  :plugins [[lein-datomic "0.2.0"]
+            [lein-autoexpect "1.0"]] 
 
   :datomic {:schemas ["resources/datomic" ["schema.edn"]]
             :install-location "<path_to_datomic-free-0.9.5697"}
