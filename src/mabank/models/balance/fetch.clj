@@ -19,7 +19,10 @@
 
 (defn get-status
   [contents]
-  (first (map (fn [item] (nth item 2)) contents)))
+  (->>
+    contents
+    (map (fn [item] (nth item 2)))
+    first))
 
 (defn vector-to-hashmap
   ([] [])
