@@ -22,11 +22,9 @@
   (first (map (fn [item] (nth item 2)) contents)))
 
 (defn vector-to-hashmap
-  [contents]
-  (cond
-    (empty? contents) []
-    (not (empty? contents)) (hash-map :amount (sum-amount contents)
-                                      :status (get-status contents))))
+  ([] [])
+  (contents (hash-map :amount (sum-amount contents)
+                      :status (get-status contents))))
 
 (defn run
   [req]
