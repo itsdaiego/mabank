@@ -8,7 +8,6 @@
             [clj-time.format :as time-format]
             [robert.hooke :as hooke]))
 
-
 (def mdr-rate 0.05)
 
 (def default-status "waiting-payemnt")
@@ -41,7 +40,6 @@
                           :payment-date (calculate-payment-date current-installment)
                           :recipient-id (:recipient-id transaction)
                           :transaction-id (:transaction-id transaction))
-
         tx-result @(d/transact db/conn [{:db/id new-id
                                           :payable/amount (:amount payable)
                                           :payable/fee (:fee payable)
@@ -51,14 +49,12 @@
                                           :payable/transaction (:transaction-id payable)
                                           :payable/status default-status
                                           }])]
-
     (assoc payable  :payable-id (d/resolve-tempid (:db-after tx-result) 
                                                   (:tempids tx-result) new-id))))
 
 (defn build
   [payable]
   ())
-
 
 (defn save-payables
   [transaction]

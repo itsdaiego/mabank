@@ -11,7 +11,6 @@
             [mabank.models.payable.fetch :as payable-fetch]
             [mabank.models.balance.fetch :as balance-fetch]))
 
-
 (defn get-recipients
   [req]
   (ring-resp/content-type (ring-resp/response @(future(recipient-fetch/run))) "application/json"))
@@ -59,4 +58,3 @@
               ::http/container-options {:h2c? true
                                         :h2? false
                                         :ssl? false}})
-

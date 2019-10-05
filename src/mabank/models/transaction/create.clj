@@ -10,7 +10,6 @@
 
 (def new-id (d/tempid :db.part/user))
 
-
 (defn parse-to-hashmap
   [req]
   (let [params (:json-params req)]
@@ -41,6 +40,5 @@
   (-> (parse-to-hashmap req)
       (save)
       (build)))
-
 
 (hooke/add-hook #'build #'payable-create/run)

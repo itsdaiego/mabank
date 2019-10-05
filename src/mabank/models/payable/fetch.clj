@@ -3,7 +3,6 @@
             [datomic.api :as d]
             [cheshire.core :refer :all]))
 
-
 (defn find-payables
   []
   (d/q '[:find ?e ?amount ?fee ?installment ?recipient-id ?transaction-id ?status ?payment-date

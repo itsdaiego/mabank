@@ -6,14 +6,12 @@
 (defn find-balance
   [req]
   (let [recipient-id (read-string(get-in req [:path-params :recipient-id]))]
-
     (d/q '[:find ?e ?amount ?status
            :in $ ?recipient-id
            :where [?e :balance/recipient ?recipient-id]
            [?e :balance/amount ?amount]
            [?e :balance/status ?status]] 
          (d/db db/conn) recipient-id)))
-
 
 (defn sum-amount
   [contents]

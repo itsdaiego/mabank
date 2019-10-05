@@ -10,7 +10,6 @@
   (let [params (:json-params req)]
     (hash-map :name (:name params)
               :document_number (:document_number params))))
-  
 
 (defn save
   [params]
