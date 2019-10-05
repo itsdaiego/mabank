@@ -21,7 +21,7 @@
   [contents]
   (->>
     contents
-    (map (fn [item] (nth item 2)))
+    (map #(nth %1 2))
     first))
 
 (defn vector-to-hashmap
