@@ -25,11 +25,12 @@
 
 (defn calculate-payment-date
   [installment]
-  (time-coerce/to-date (time-core/plus (time-format/parse 
-                    (time-format/formatters :year-month-day) (str (time-core/today)))
-                  (time-core/days (* 30 installment)))))
-
-
+  (time-coerce/to-date
+    (time-core/plus
+      (time-format/parse
+        (time-format/formatters :year-month-day)
+        (str (time-core/today)))
+      (time-core/days (* 30 installment)))))
 
 (defn save
   [transaction current-installment]
