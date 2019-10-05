@@ -7,23 +7,23 @@
 
 (defn parse-to-hashmap
   [req]
-  (let [params (get req :json-params)]
-    (hash-map :name (get params :name)
-              :document_number (get params :document_number))))
+  (let [params (:json-params req)]
+    (hash-map :name (:name params)
+              :document_number (:document_number params))))
   
 
 (defn save
   [params]
-  @(d/transact conn [{
-                        :recipient/name (get params :name)
-                        :recipient/document_number (get params :document_number)
+  @(d/transact db/conn [{
+                        :recipient/name (:name params)
+                        :recipient/document_number (:document_number params)
                         }])
   params)
 
 (defn build-response
   [recipient]
-  (-> (hash-map :name (get recipient :name)
-                :document_number (get recipient :document_number))
+  (-> (hash-map :name (:name recipient)
+                :document_number (:document_number recipient))
       (generate-string)))
 
 (defn run

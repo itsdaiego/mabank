@@ -17,7 +17,7 @@
 
 (defn calculate-amount
   [transaction]
-  (/ (get transaction :amount) (get transaction :installments)))
+  (/ (:amount transaction) (:installments transaction)))
 
 (defn calculate-fee
   [payable-amount]
@@ -38,16 +38,16 @@
                           :fee (calculate-fee payable-amount)
                           :installment current-installment
                           :payment-date (calculate-payment-date current-installment)
-                          :recipient-id (get transaction :recipient-id)
-                          :transaction-id (get transaction :transaction-id))
+                          :recipient-id (:recipient-id transaction)
+                          :transaction-id (:transaction-id transaction))
 
         tx-result @(d/transact db/conn [{:db/id new-id
-                                          :payable/amount (get payable :amount)
-                                          :payable/fee (get payable :fee)
-                                          :payable/installment (get payable :installment)
-                                          :payable/payment-date (get payable :payment-date)
-                                          :payable/recipient (get payable :recipient-id)
-                                          :payable/transaction (get payable :transaction-id)
+                                          :payable/amount (:amount payable)
+                                          :payable/fee (:fee payable)
+                                          :payable/installment (:installment payable)
+                                          :payable/payment-date (:payment-date payable)
+                                          :payable/recipient (:recipient-id payable)
+                                          :payable/transaction (:transaction-id payable)
                                           :payable/status default-status
                                           }])]
 
@@ -62,7 +62,7 @@
 (defn save-payables
   [transaction]
   (doall (map (partial save transaction)
-              (drop 1 (range (inc (get transaction :installments)))))))
+              (drop 1 (range (inc (:installments transaction)))))))
 
 (defn run
   [model transaction]
