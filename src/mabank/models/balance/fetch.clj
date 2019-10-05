@@ -15,7 +15,7 @@
 
 (defn sum-amount
   [contents]
-  (reduce + (map (fn [item] (second item)) contents)))
+  (reduce + (map second contents)))
 
 (defn get-status
   [contents]
