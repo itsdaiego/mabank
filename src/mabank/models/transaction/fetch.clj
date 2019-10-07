@@ -3,6 +3,7 @@
             [datomic.api :as d]
             [cheshire.core :refer :all]))
 
+(def conn db/conn)
 
 (defn find-transactions
   []
@@ -12,7 +13,7 @@
          [?e :transaction/installments ?installments]
          [?e :transaction/recipient ?recipient-id]
          [?e :transaction/status ?status]]
-       (d/db db/conn)))
+       (d/db conn)))
 
 (defn vector-to-hashmap
   [contents]
