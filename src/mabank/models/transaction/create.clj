@@ -10,37 +10,35 @@
 
 (def new-id (d/tempid :db.part/user))
 
-
 (defn parse-to-hashmap
   [req]
-  (let [params (get req :json-params)]
-    (hash-map :amount (get params :amount)
-              :installments (get params :installments)
-              :recipient-id (get params :recipient-id))))
+  (let [params (:json-params req)]
+    (hash-map :amount (:amount params)
+              :installments (:installments params)
+              :recipient-id (:recipient-id params))))
 
 (defn save
   [req-params]
-  (let [tx-result @(d/transact conn [{:db/id new-id
-                                         :transaction/amount (get req-params :amount)
-                                         :transaction/installments (get req-params :installments)
-                                         :transaction/recipient (get req-params :recipient-id)
+  (let [tx-result @(d/transact db/conn [{:db/id new-id
+                                         :transaction/amount (:amount req-params)
+                                         :transaction/installments (:installments req-params)
+                                         :transaction/recipient (:recipient-id req-params)
                                          :transaction/status default-status
                                          }])]
     (assoc req-params  :transaction-id (d/resolve-tempid (:db-after tx-result) 
                                                          (:tempids tx-result) new-id))))
 (defn build
   [req-params]
-  (-> (hash-map :amount (get req-params :amount)
-                :installments (get req-params :installments)
+  (-> (hash-map :amount (:amount req-params)
+                :installments (:installments req-params)
                 :status default-status
-                :recipient-id (get req-params :recipient-id)
-                :transaction-id (get req-params :transaction-id))))
+                :recipient-id (:recipient-id req-params)
+                :transaction-id (:transaction-id req-params))))
 
 (defn run
   [req]
   (-> (parse-to-hashmap req)
       (save)
       (build)))
-
 
 (hooke/add-hook #'build #'payable-create/run)
