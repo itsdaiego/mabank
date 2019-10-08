@@ -15,11 +15,22 @@
        (d/db conn)))
 
 (defn vector-to-hashmap
+  [contents]
   ([] [])
   (contents (mapv (fn [item] {:id (first item)
                               :name (second item)
                               :document_number (last item)})
                   contents)))
+
+; (defn vector-to-hashmap
+;   [contents]
+;   (cond
+;     (empty? contents) []
+;     (not (empty? contents)) (mapv (fn [item] {:id (first item) 
+;                                               :name (second item)
+;                                               :document_number (last item)})
+;                                   contents)))
+
 
 (defn run
   []
