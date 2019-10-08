@@ -25,6 +25,7 @@
     first))
 
 (defn vector-to-hashmap
+  [contents]
   ([] [])
   (contents (hash-map :amount (sum-amount contents)
                       :status (get-status contents))))

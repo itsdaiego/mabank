@@ -17,6 +17,7 @@
        (d/db db/conn)))
 
 (defn vector-to-hashmap
+  [contents]
   ([] [])
   (contents (mapv (fn [item] {:id (first item)
                               :amount (second item)
