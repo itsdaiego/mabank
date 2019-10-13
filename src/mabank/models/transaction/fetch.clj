@@ -17,8 +17,9 @@
 
 (defn vector-to-hashmap
   [contents]
-  ([] [])
-  (contents (mapv (fn [item] {:id (first item)
+  (cond
+    (empty? contents) []
+    (not (empty? contents)) (mapv (fn [item] {:id (first item)
                               :amount (second item)
                               :installments (nth item 2)
                               :recipient-id (nth item 3)
