@@ -26,9 +26,10 @@
 
 (defn vector-to-hashmap
   [contents]
-  ([] [])
-  (contents (hash-map :amount (sum-amount contents)
-                      :status (get-status contents))))
+  (cond
+    (empty? contents) []
+    (not (empty? contents)) (hash-map :amount (sum-amount contents)
+                                      :status (get-status contents))))
 
 (defn run
   [req]
