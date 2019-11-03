@@ -4,7 +4,8 @@
             [datomic.api :as d]
             [mabank.models.helper.recipient-test :as mock-recipient]
             [mabank.models.helper.transaction-test :as mock-transaction]
-            [mabank.models.transaction.fetch :refer :all]))
+            [mabank.models.transaction.fetch :refer :all]
+            [cheshire.core :refer :all]))
 
 (defn create-empty-db
   []
@@ -18,9 +19,17 @@
 
 (def fake-conn (create-empty-db))
 
-(expect "[{\"id\":17592186045420,\"amount\":100,\"installments\":1,\"recipient-id\":17592186045418,\"status\":\"waiting-payemnt\"}]"
+(defn parse-response
+  [response]
+  (let [parsed-response (parse-string response true)]
+    (hash-map :amount (:amount (first parsed-response))
+              :installments (:installments (first parsed-response))
+              :status (:status (first parsed-response))
+              :recipient-id (:recipient-id (first parsed-response)))))
+
+(expect {:amount 100 :installments 1 :recipient-id 123 :status "waiting-payemnt"}
 		(with-redefs [conn fake-conn]
 		  (do
-            (let [recipient-id (get (mock-recipient/create fake-conn) :recipient-id)]
-              (mock-transaction/create recipient-id fake-conn))
-            (run))))
+            (mock-recipient/create fake-conn)
+            (mock-transaction/create fake-conn)
+            (parse-response (run)))))
