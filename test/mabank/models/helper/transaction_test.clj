@@ -5,11 +5,11 @@
 (def new-id (d/tempid :db.part/user))
 
 (defn create
-  [recipient-id conn]
+  [conn]
   (let [tx-result @(d/transact conn [{:db/id new-id
                                          :transaction/amount 100
                                          :transaction/installments 1
-                                         :transaction/recipient recipient-id
+                                         :transaction/recipient 123
                                          :transaction/status "waiting-payemnt"
                                          }])]
     (hash-map :transaction-id (d/resolve-tempid (:db-after tx-result) 

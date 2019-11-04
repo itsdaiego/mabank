@@ -3,7 +3,8 @@
             [expectations :refer :all]
             [datomic.api :as d]
             [mabank.models.helper.recipient-test :as mock-recipient]
-            [mabank.models.transaction.create :refer :all]))
+            [mabank.models.transaction.create :refer :all]
+            [cheshire.core :refer :all]))
 
 (defn create-empty-db
   []
@@ -18,10 +19,18 @@
 (def fake-conn (create-empty-db))
 
 (def transaction-req { :json-params {:amount 100
-                                     :installments 1}})
+                                     :installments 1
+                                     :recipient-id 123
+                                     :transaction-id 321}})
 
-(expect "{\"amount\":100,\"installments\":1,\"recipient-id\":17592186045418,\"transaction-id\":17592186045420}"
+(defn parse-response
+  [response]
+  (let [parsed-response (parse-string response true)]
+    (hash-map :amount (:amount parsed-response)
+              :installments (:installments parsed-response)
+              :recipient-id (:recipient-id parsed-response))))
+
+(expect {:amount 100 :installments 1 :recipient-id 123}
         (with-redefs [conn fake-conn]
           (do
-            (let [recipient-id (get (mock-recipient/create fake-conn) :recipient-id)]
-              (run (assoc-in transaction-req [:json-params :recipient-id] recipient-id))))))
+            (parse-response (run transaction-req)))))
