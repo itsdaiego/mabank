@@ -10,19 +10,21 @@ That's  "ma" fictional bank system written in clojure!
 
 ### How to use ###
 
-Inside the `project.clj` file, change <path_to_datomic-free-0.9.5697> to the datomic folder's path, example: `/home/myusername/.lein/datomic-free-0.9.5697`
+1 - Start the transactor
 
-Run the following commands:
-
-- lein datomic start
-
-- lein datomic initialize
+```
+~/.lein/datomic-free-0.9.5697.21/bin/transactor <path_to_template>/mabank/resources/datomic/free-transactor-template.properties
+```
+2 - Start the application
 
 - lein run
 
-Note: It might throw an exception if you have jdk11
-
-
 ### Running tests ###
 
-`lein autoexpect`
+`lein test`
+
+### TODO 
+
+- [] create integration and e2e tests
+- [] create transfer model
+- [] create balance model
